@@ -1,0 +1,233 @@
+[
+  {
+    "id": 1,
+    "name": "Access Control Attacks",
+    "description": "The unauthorized access gained to chatbots leads to the disclosure of sensitive information.",
+    "impact": "Information loss, session hijack.",
+    "mitigation": "Strong authentication."
+  },
+  {
+    "id": 2,
+    "name": "Attribute Inference Attacks",
+    "description": "Attribute inference attacks occur when attackers deduce sensitive information by analyzing the behavior or responses of a machine learning model (e.g., age, gender, location) from a language model’s responses.",
+    "impact": "Breach user privacy, potentially exposing individuals to discrimination and misuse of sensitive information.",
+    "mitigation": "Pipeline for cleaning raw corpora and creating high-quality training corpora for LLMs: language identification, detoxification, debiasing, de-identification, and deduplication."
+  },
+  {
+    "id": 3,
+    "name": "Biases in Data Preparation",
+    "description": "The models inherit and perpetuate biases present in training data. These biases, often rooted in imbalanced or discriminatory content, can lead to unfair and potentially harmful outputs that marginalize specific individuals or groups based on factors like race, gender, age, language, occupation, or geography.",
+    "impact": "Destruction of public trust, perpetuation of societal inequalities, and amplification of harmful behaviors.",
+    "mitigation": "Established pipeline for corpora cleaning: language identification, detoxification, debiasing, de-identification, and deduplication."
+  },
+  {
+    "id": 4,
+    "name": "Breach of the Right To Be Forgotten (RTBF)",
+    "description": "Inability to fully remove personal data from the model’s memory after the user requests deletion.",
+    "impact": "Violates user privacy rights and non-compliance with regulations.",
+    "mitigation": "Introducing mechanisms for removing specific data from models like exact machine unlearning and approximate machine unlearning."
+  },
+  {
+    "id": 5,
+    "name": "Catastrophic Forgetting",
+    "description": "Occurs when a model loses previously learned information upon learning new tasks, leading to a decline in performance for older tasks.",
+    "impact": "Hinders the model’s ability to retain valuable knowledge, affecting its overall functionality and reliability in applications.",
+    "mitigation": "Generation of synthetic data using prior knowledge to reinforce learning during new training. Use adaptive learning rates (LR ADJUST) to balance new learning and retention of prior knowledge. Apply long-term and short-term memory systems to preserve learned skills. Combine weights of old and new models to maintain performance on both new and prior tasks."
+  },
+  {
+    "id": 6,
+    "name": "Data Poisoning Attack",
+    "description": "Type of adversarial attack where malicious data is injected into training datasets during the data preparation process.",
+    "impact": "Compromised model integrity, due to vulnerabilities or biases, compromised security, effectiveness, or ethical behavior. Introduction of backdoors.",
+    "mitigation": "Usage of robust data validation techniques, and exhaustive analysis to make falsifying records more challenging."
+  },
+  {
+    "id": 7,
+    "name": "Data Theft from AI Memory",
+    "description": "Occurs when unauthorized users extract sensitive information that the model has retained from its training data.",
+    "impact": "Leads to privacy breaches and misuse of information.",
+    "mitigation": "De-identification and anonymization of the data, injecting noise into data to lower the chance of memorization."
+  },
+  {
+    "id": 8,
+    "name": "Extraction Attacks",
+    "description": "The aim is to acquire specific resources (e.g., model gradient, training data) or confidential information directly.",
+    "impact": "Intellectual property theft, data leakage, reputational damage.",
+    "mitigation": "Differential privacy is demonstrated to be a robust defense against data extraction attacks, though it increases model perplexity."
+  },
+  {
+    "id": 9,
+    "name": "Fabricated Identity Threat",
+    "description": "Involves the use of AIGC services to create realistic fake identities through realistic images, videos, audio, and text.",
+    "impact": "Heightens risks of fraud, deception, and trust problems in online interactions.",
+    "mitigation": "Use of advanced verification methods, such as biometric authentication or other digital identity verification trained models for anomaly detection, as well as promote user awareness regarding the risks of fake identities."
+  },
+  {
+    "id": 10,
+    "name": "False Content Creation in AIGC",
+    "description": "Deliberate use of AIGC models to produce false content.",
+    "impact": "Spread of misinformation.",
+    "mitigation": "Monitoring neuron activation regarding the given instructions, which are more sensitive, accurate, and specified for malicious usage, and encouraging human oversight of AI outputs."
+  },
+  {
+    "id": 11,
+    "name": "Hallucination",
+    "description": "Refers to instances where AI models generate outputs that are factually incorrect or nonsensical, despite appearing plausible.",
+    "impact": "Misinformation, undermining trust, and potentially causing harm in decision-making processes.",
+    "mitigation": "Employing frameworks like MIXALIGN to align model responses with verified knowledge. Use approaches like Chain-of-Verification (COVE) to verify responses before finalizing. Implement regular human review to check AI-generated content for accuracy."
+  },
+  {
+    "id": 12,
+    "name": "Harmful & Violent Content Generation",
+    "description": "Users may use AIGC services, due to the presence of harmful content, in order to produce harmful content, such as sexually explicit and violent material.",
+    "impact": "Hate speech, discrimination, incitement to violence, false narratives, and even social engineering attacks, potential loss of trust in the technology.",
+    "mitigation": "Implementing content moderation systems, employing ethical guidelines for AI use, and utilization of filtering technologies to detect and block harmful outputs. Also, the implementation of safeguards to detect and correct those contents can be mitigated."
+  },
+  {
+    "id": 13,
+    "name": "Impersonation Threat",
+    "description": "Adversaries can exploit AIGC services to impersonate a specific person and interact with others, thereby facilitating crimes such as fraud and identity theft.",
+    "impact": "Identity theft, fraud.",
+    "mitigation": "Use of advanced verification methods, such as biometric authentication or other digital identity verification trained models for anomaly detection, as well as promote user awareness regarding the risks of fake identities."
+  },
+  {
+    "id": 14,
+    "name": "Instant Malicious Code Creation",
+    "description": "Manipulation of LLMs into generating malware or other harmful scripts if instructed properly.",
+    "impact": "Cybersecurity breaches, malware creation.",
+    "mitigation": "Monitoring neuron activation regarding the given instructions, which are more sensitive, accurate, and specified for malicious usage."
+  },
+  {
+    "id": 15,
+    "name": "Intellectual Property (IP) Issues in Data Preparation",
+    "description": "Training datasets that may contain unauthorized data, causing potential legal risks and IP issues.",
+    "impact": "Legal repercussions, including lawsuits and financial penalties.",
+    "mitigation": "Using authorized datasets and obtaining explicit permissions from content creators. Conducting thorough audits of training data to ensure proper licensing."
+  },
+  {
+    "id": 16,
+    "name": "Intellectual Property Issues for AI-Produced Content",
+    "description": "Arising from the complexities of ownership and accountability regarding the outputs generated by large generative AI models, becoming unclear who holds the intellectual property rights.",
+    "impact": "Legal challenges for organizations using these technologies.",
+    "mitigation": "IP watermarking, cryptography, hardware-based IP protection methods, and blockchain for recording and verifying IP rights."
+  },
+  {
+    "id": 17,
+    "name": "Jailbreak",
+    "description": "Aims to circumvent the restrictions imposed by the model owner or the hosting platform to achieve unauthorized access to the Language Models’ internal functionalities and protocols.",
+    "impact": "Unauthorized access to sensitive data, and manipulation of model outputs.",
+    "mitigation": "Instruction Processing (Pre-Processing) applies transformations over instructions sent by users, in order to destroy potential adversarial contexts or malicious intents."
+  },
+  {
+    "id": 18,
+    "name": "Membership Inference Attack on Pre-Training",
+    "description": "A specific type of inference attack in the field of data security and privacy that determines whether a data record was part of a model’s pre-training dataset, given white-/black-box access to the model and the specific data record by targeting the broad dataset used in the pre-training stage.",
+    "impact": "Breach user privacy, potentially exposing individuals to discrimination and misuse of sensitive information.",
+    "mitigation": "Pipeline for cleaning raw corpora and creating high-quality training corpora for LLMs: language identification, detoxification, debiasing, de-identification, and deduplication."
+  },
+  {
+    "id": 19,
+    "name": "Membership Inference Attacks on Fine Tuning",
+    "description": "A specific type of inference attack in the field of data security and privacy that determines whether a data record was part of a model’s fine-tuning training dataset, given white-/black-box access to the model and the specific data record by targeting the narrower, more specific dataset.",
+    "impact": "Breach user privacy, potentially exposing individuals to discrimination and misuse of sensitive information.",
+    "mitigation": "Pipeline for cleaning raw corpora and creating high-quality training corpora for LLMs: language identification, detoxification, debiasing, de-identification, and deduplication."
+  },
+  {
+    "id": 20,
+    "name": "Misunderstanding",
+    "description": "LLM agents inadequately comprehend or inaccurately respond to the intentions or instructions conveyed by humans or other agents during interactions.",
+    "impact": "Inappropriate or dangerous behaviors of LLM agents, affecting their safety and reliability.",
+    "mitigation": "HyCxG framework, SIT method, LaMAI."
+  },
+  {
+    "id": 21,
+    "name": "Model Functionality Theft",
+    "description": "The illegal act of copying or extracting weights or parameters or data from closed-source LLM models to create functional equivalents.",
+    "impact": "Reputation loss, model integrity loss, financial damage, misinformation, and privacy violation.",
+    "mitigation": "Model obfuscation, strong access controls, and authentication, regular auditing."
+  },
+  {
+    "id": 22,
+    "name": "Model Inversion Attacks",
+    "description": "The attacker attempts to reconstruct or reverse-engineer the training data used to train an LLM based on its outputs or internal representations.",
+    "impact": "Privacy breaches, allow unauthorized disclosure of sensitive data, such as personal identifiers or confidential information.",
+    "mitigation": "Using a federated learning decentralized approach as it keeps data on local devices, only sharing aggregated updates with the central model as this reduces the model's reliance on any single dataset, minimizing the leakage risk in distributed environments."
+  },
+  {
+    "id": 23,
+    "name": "Model Poisoning Attack",
+    "description": "Type of adversarial attack on AI-generated content (AIGC), also known as backdoor attack, models that are trained through distributed training paradigms, like federated learning. In such attacks, malicious participants in the distributed learning process upload compromised updates to the aggregation server during model training.",
+    "impact": "Degrade of the model's performance and compromise its integrity.",
+    "mitigation": "Usage of robust aggregation methods, such as FLTrust, can be employed by the aggregation server to help preserve the performance and security of the AIGC model."
+  },
+  {
+    "id": 24,
+    "name": "Overreliance on LLM-generated Content",
+    "description": "Excessive reliance on LLM-generated content without human oversight.",
+    "impact": "Users become complacent, gradually giving up their critical thinking skills in evaluating information.",
+    "mitigation": "Guidelines and policies for AIGC use, and user education."
+  },
+  {
+    "id": 25,
+    "name": "Pervasive Private Data Collection",
+    "description": "The extensive and continuous gathering of data from a wide range of sources, including public, third-party, and private data streams, often without explicit user awareness.",
+    "impact": "Privacy violations and potential legal repercussions for organizations that fail to protect user data adequately.",
+    "mitigation": "Pipeline for cleaning raw corpora and creating high-quality training corpora for LLMs: language identification, detoxification, debiasing, de-identification, and deduplication."
+  },
+  {
+    "id": 26,
+    "name": "Phishing Emails Creation",
+    "description": "Convincingly written emails designed to trick recipients into revealing personal information.",
+    "impact": "Financial and personal data loss.",
+    "mitigation": "Monitoring neuron activation regarding the given instructions, which are more sensitive, accurate, and specified for malicious usage."
+  },
+  {
+    "id": 27,
+    "name": "Plugin Squatting",
+    "description": "Attackers could build plugins for LLM applications that do not yet have plugins or masquerade as other plugins by copying their names and descriptions. This brings the possibility of plug-ins being used to steal chat histories, access personal information, or execute code on users’ machines.",
+    "impact": "Malware attacks, prompt hijacking, loss of personal data, and reputational and monetary damage to the original plugins.",
+    "mitigation": "Strict naming policies and naming reservation, review, and approval processes."
+  },
+  {
+    "id": 28,
+    "name": "Privacy Compliance in Data Collection",
+    "description": "Violation of privacy compliance in data collection practices of AIGC services.",
+    "impact": "Non-compliance risks legal penalties, user mistrust, and service restrictions.",
+    "mitigation": "Following GDPR, HIPAA, and emerging AI regulations, de-identification of the collected data."
+  },
+  {
+    "id": 29,
+    "name": "Private Data Leakage in Interacting with AI",
+    "description": "LLMs can collect historical conversation and multimodal inputs which may include private and sensitive personal information.",
+    "impact": "Disclosure of sensitive information and proprietary algorithms, trade secrets, and other details.",
+    "mitigation": "User input should be sanitized in order for the model not to receive any sensitive data."
+  },
+  {
+    "id": 30,
+    "name": "Prompt Injection",
+    "description": "Occurs when an attack hijacks the model’s output by injecting malicious or biased prompts into the model’s input, thereby generating responses that align with the attacker’s goal.",
+    "impact": "Generation of harmful content and spread of misinformation.",
+    "mitigation": "Enhance the LLMs’ ability to recognize and disregard malicious instructions embedded within the external content through adversarial training."
+  },
+  {
+    "id": 31,
+    "name": "Prompt Theft",
+    "description": "Involves the unauthorized acquisition of carefully constructed user prompts.",
+    "impact": "The loss of proprietary prompts.",
+    "mitigation": "Prompt obfuscation and encryption techniques in order to reduce network eavesdropping."
+  },
+  {
+    "id": 32,
+    "name": "Remote Code Execution",
+    "description": "RCE attacks typically target vulnerabilities in software applications, web services, or servers to execute arbitrary code remotely.",
+    "impact": "Compromised LLM environment.",
+    "mitigation": "LLMSMITH - a multi-step approach for detecting vulnerabilities in LLM-integrated apps."
+  },
+  {
+    "id": 33,
+    "name": "Sponge Attack",
+    "description": "The model is manipulated to waste resources on irrelevant computations, similar to denial-of-service (DoS) attacks in networks.",
+    "impact": "Increased model latency and energy consumption. Compromised availability.",
+    "mitigation": "Resource and rate limit, input size, and complexity validation."
+  }
+]

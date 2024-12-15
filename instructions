@@ -1,0 +1,29 @@
+Steps to Reload the Decision Tree
+1. Clear Existing Data
+Before reloading the updated decision tree, clear the current data in the database tables to avoid duplication or conflicts.
+
+Run the following in the Django shell:
+bash
+" python manage.py shell "
+Then, execute:
+"
+from questionnaire.models import Question, Option, Threat
+"
+# Delete all existing data
+"
+Question.objects.all().delete()
+Option.objects.all().delete()
+Threat.objects.all().delete()
+"
+print("Existing decision tree cleared.")
+exit()
+2. Update the JSON File
+Make the required changes to your decision_tree.json file. Ensure all IDs and references (next_question_id) are updated to maintain integrity.
+
+3. Reload the JSON into the Database
+Use the load_questions management command you’ve already implemented to reload the updated decision tree.
+
+Run in bash
+" python manage.py load_questions "
+If successful, you’ll see:
+Decision tree loaded successfully!
