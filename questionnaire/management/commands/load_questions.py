@@ -1,6 +1,6 @@
 import json
 from django.core.management.base import BaseCommand
-from questionnaire.models import Question, Option
+from questionnaire.models import Question, Option, Threat
 
 class Command(BaseCommand):
     help = "Load questions and options from JSON"
@@ -12,7 +12,7 @@ class Command(BaseCommand):
             with open(file_path, "r") as file:
                 data = json.load(file)
 
-                # Step 1: Create questions without next_question_id
+                # First loop: Create or load questions without next_question and other fields
                 questions = {}
                 for item in data:
                     question, created = Question.objects.get_or_create(
@@ -22,40 +22,37 @@ class Command(BaseCommand):
                     questions[question.id] = question
                     print(f"Question Created/Loaded: {question.id}, Text: {question.text}")
 
-                # Step 2: Update next_question and create options
-                # for item in data:
-                #     question = questions[item["id"]]
-                #
-                #     # Update next_question field if it exists
-                #     if item.get("next_question_id"):
-                #         next_question = questions.get(item["next_question_id"])
-                #         if next_question:
-                #             question.next_question = next_question
-                #             question.save()
-                #             print(f"Updated Next Question for ID {question.id}: {next_question.id}")
-                #         else:
-                #             print(f"Warning: Next Question ID {item['next_question_id']} not found for Question ID {question.id}")
+                # Second loop: Update next_question, is_final, answer, and create options
                 for item in data:
                     question = questions[item["id"]]
+
+                    # Update next_question if available
                     next_question_id = item.get("next_question_id")
                     if next_question_id:
                         next_question = questions.get(next_question_id)
                         if next_question:
                             question.next_question = next_question
-                            question.save()
-                            print(f"Updated Next Question for ID {question.id}: {next_question.id}")
-                        else:
-                            print(f"Next Question ID {next_question_id} not found for Question ID {question.id}")
 
-                    # Create options
+                    # Set is_final and answer
+                    question.is_final = item.get("is_final", False)
+                    if item.get("is_final"):
+                        question.answer = Threat.objects.filter(id=item.get("answer")).first()
+
+                    question.save()
+
+                    # Create options for the question
                     for option in item["options"]:
+                        threat_instance = None
+                        if option.get("threat_id"):
+                            threat_instance = Threat.objects.get(id=option["threat_id"])
+
                         Option.objects.get_or_create(
                             id=option["id"],
                             question=question,
                             defaults={
                                 "text": option["text"],
                                 "next_question": questions.get(option.get("next_question_id")),
-                                "threat_id": option.get("threat_id"),
+                                "threat": threat_instance,
                             },
                         )
                         print(f"Option Created: {option['id']} for Question {question.id}")

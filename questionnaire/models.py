@@ -5,9 +5,14 @@ class Question(models.Model):
     next_question = models.ForeignKey(
         'self', null=True, blank=True, on_delete=models.SET_NULL
     )
+    is_final = models.BooleanField(default=False)  # Indicates if this is the last question
+    answer = models.ForeignKey(  # Links to a Threat if it's the final question
+        'Threat', null=True, blank=True, on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return self.text
+
 
 
 class Option(models.Model):
