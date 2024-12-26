@@ -110,7 +110,7 @@ const QuestionnairePage = () => {
                   <p><strong>Name:</strong> {question.answer.name}</p>
                   <p><strong>Description:</strong> {question.answer.description}</p>
                   <p><strong>Impact:</strong> {question.answer.impact}</p>
-                  <p><strong>Mitigation:</strong> {question.answer.mitigation}</p>
+                  <p><strong>Mitigation strategy:</strong> {question.answer.mitigation}</p>
                 </>
               ) : (
                 <p>No threat details available.</p>
@@ -128,8 +128,11 @@ const QuestionnairePage = () => {
                 {question.options.map((option) => (
                   <li
                     key={option.id}
-                    onClick={() => handleOptionClick(option)}
-                    style={{ cursor: "pointer", margin: "5px 0" }}
+                    onClick={() => index === questionHistory.length - 1 && handleOptionClick(option)} // Disable clicks for previous questions
+                    style={{
+                      cursor: index === questionHistory.length - 1 ? "pointer" : "default", // Indicate unclickable options
+                      margin: "5px 0",
+                    }}
                   >
                     {option.text}
                   </li>
