@@ -2,7 +2,6 @@ import json
 from django.core.management.base import BaseCommand
 from questionnaire.models import Threat
 
-
 class Command(BaseCommand):
     help = "Load threats from JSON"
 
@@ -12,9 +11,8 @@ class Command(BaseCommand):
         try:
             with open(file_path, "r") as file:
                 data = json.load(file)
-
                 for item in data:
-                    Threat.objects.update_or_create(
+                    Threat.objects.get_or_create(
                         id=item["id"],
                         defaults={
                             "name": item["name"],
@@ -23,9 +21,9 @@ class Command(BaseCommand):
                             "mitigation": item["mitigation"],
                         },
                     )
+                    print(f"Threat Created/Loaded: {item['id']}, Name: {item['name']}")
 
-                self.stdout.write(self.style.SUCCESS("Threats loaded successfully!"))
-
+            self.stdout.write(self.style.SUCCESS("Threats loaded successfully!"))
         except FileNotFoundError:
             self.stdout.write(self.style.ERROR(f"File not found: {file_path}"))
         except Exception as e:

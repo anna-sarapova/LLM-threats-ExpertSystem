@@ -2,111 +2,176 @@
   {
     "id": 1,
     "question": "What kind of problem are you facing?",
-    "is_final": false,
     "options": [
-      { "id": 1, "text": "Security or unauthorized access.", "next_question_id": 2 },
-      { "id": 2, "text": "Personal or sensitive information being exposed or misused.", "next_question_id": 3 },
-      { "id": 3, "text": "Wrong or confusing answers from the AI.", "next_question_id": 4 },
-      { "id": 4, "text": "Harmful or inappropriate content or misuse of the AI.", "next_question_id": 5 }
+      { "id": 1, "text": "Security or unauthorized access.", "is_final": false,
+        "next_question_id": 2 },
+      { "id": 2, "text": "Personal or sensitive information being exposed or misused.", "is_final": false, "next_question_id": 3 },
+      { "id": 3, "text": "Wrong or confusing answers from the AI.", "is_final": false, "next_question_id": 4 },
+      { "id": 4, "text": "Harmful or inappropriate content or misuse of the AI.", "is_final": false, "next_question_id": 5 }
     ]
   },
   {
     "id": 2,
     "question": "When does the problem happen?",
-    "is_final": false,
     "options": [
-      { "id": 5, "text": "During the collection or preparation of the data.", "threat_id": 6 },
-      { "id": 6, "text": "During the training or fine-tuning of the model.", "threat_id": 23 },
-      { "id": 7, "text": "When the model is being used.", "next_question_id": 6 }
+      { "id": 5,
+        "text": "During the collection or preparation of the data.",
+        "is_final": true,
+        "threat_id": 6 },
+      { "id": 6,
+        "text": "During the training or fine-tuning of the model.",
+        "is_final": true,
+        "threat_id": 23 },
+      { "id": 7,
+        "text": "When the model is being used.",
+        "is_final": false,
+        "next_question_id": 6 }
     ]
   },
   {
     "id": 3,
     "question": "At what stage of LLM lifecycle did the problem happen?",
-    "is_final": false,
     "options": [
-      { "id": 8, "text": "During the collection or preparation of the data.", "next_question_id": 9 },
-      { "id": 9, "text": "During the training or fine-tuning of the model.", "threat_id": 19 },
-      { "id": 10, "text": "When the model is being used.", "next_question_id": 10 }
+      { "id": 8, "text": "During the collection or preparation of the data.", "is_final": false, "next_question_id": 9 },
+      { "id": 9, "text": "During the training or fine-tuning of the model.", "is_final": true, "threat_id": 19 },
+      { "id": 10, "text": "When the model is being used.", "is_final": false, "next_question_id": 7 }
     ]
   },
   {
     "id": 4,
     "question": "At what stage the problem happens?",
-    "is_final": false,
     "options": [
-      { "id": 11, "text": "During the training or fine-tuning of the model.", "threat_id": 5 },
-      { "id": 12, "text": "When the model is being used.", "next_question_id": 11 }
+      { "id": 11, "text": "During the training or fine-tuning of the model.", "is_final": true, "threat_id": 5 },
+      { "id": 12, "text": "When the model is being used.", "is_final": false, "next_question_id": 8 }
     ]
   },
   {
     "id": 5,
     "question": "What is the stage when the problem happens?",
-    "is_final": false,
     "options": [
-      { "id": 13, "text": "During the collection or preparation of the data.", "next_question_id": 12 },
-      { "id": 14, "text": "When the model is being used.", "next_question_id": 13 }
+      { "id": 13, "text": "During the collection or preparation of the data.", "is_final": false, "next_question_id": 10 },
+      { "id": 14, "text": "When the model is being used.", "is_final": false, "next_question_id": 11 }
     ]
   },
   {
     "id": 6,
     "question": "What kind of problem are you noticing?",
-    "is_final": false,
     "options": [
-      { "id": 15, "text": "The system is behaving unusually or being misused.", "next_question_id": 14 },
-      { "id": 16, "text": "Someone seems to have gained unauthorized access or control.", "next_question_id": 15 }
+      { "id": 15, "text": "The system is behaving unusually or being misused.", "is_final": false, "next_question_id": 12 },
+      { "id": 16, "text": "Someone seems to have gained unauthorized access or control.", "is_final": false, "next_question_id": 13 }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "What specific issue are you noticing?",
+    "options": [
+      { "id": 17, "text": "Sensitive information being exposed or leaked.", "is_final": false, "next_question_id": 14 },
+      { "id": 18, "text": "Unauthorized access or use of specific information.", "is_final": false, "next_question_id": 15 }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "What specific issue are you noticing?",
+    "options": [
+      { "id": 19, "text": "The AI generates incorrect or nonsensical information that looks plausible.", "is_final": true, "threat_id": 11 },
+      { "id": 20, "text": "The AI misunderstands or fails to accurately respond to instructions or intentions.", "is_final": true, "threat_id": 20 },
+      { "id": 21, "text": "The AI is deliberately used to create false or misleading content.", "is_final": true, "threat_id": 10 }
     ]
   },
   {
     "id": 9,
     "question": "What type of privacy issue are you dealing with?",
-    "is_final": false,
     "options": [
-      { "id": 17, "text": "Concerns about how data is being collected or used.", "next_question_id": 16 },
-      { "id": 18, "text": "Concerns about data being exposed or identified.", "threat_id": 18 }
+      { "id": 22, "text": "Concerns about how data is being collected or used.", "is_final": false, "next_question_id": 16 },
+      { "id": 23, "text": "Concerns about data being exposed or identified.", "is_final": true, "threat_id": 18 }
     ]
   },
   {
     "id": 10,
-    "question": "What type of privacy issue are you dealing with?",
-    "is_final": false,
+    "question": "What specifically concerns you about the data collection?",
     "options": [
-      { "id": 19, "text": "Sensitive information being exposed or leaked.", "next_question_id": 17 },
-      { "id": 20, "text": "Unauthorized access or use of specific information.", "next_question_id": 18 }
+      { "id": 24, "text": "Data is being collected extensively or from unknown sources.", "is_final": true, "threat_id": 25 },
+      { "id": 25, "text": "Data collection practices may violate privacy regulations.", "is_final": true, "threat_id": 28 }
     ]
   },
   {
     "id": 11,
-    "question": "What type of issue are you dealing with?",
-    "is_final": false,
+    "question": "What kind of misuse are you noticing?",
     "options": [
-      { "id": 21, "text": "The AI produces incorrect, unclear, or false outputs.", "next_question_id": 19 },
-      { "id": 22, "text": "The AI is being misused to deceive or harm others.", "next_question_id": 20 },
-      { "id": 23, "text": "Plugins or external tools connected to the AI seem to behave suspiciously.", "threat_id": 27 }
+      { "id": 26, "text": "The AI is being used to generate malware or harmful scripts.", "is_final": true, "threat_id": 14 },
+      { "id": 27, "text": "The AI is being used to create realistic phishing emails to deceive people.", "is_final": true, "threat_id": 26 },
+      { "id": 28, "text": "The AI is generating harmful or violent content, such as explicit or offensive material.", "is_final": true, "threat_id": 12 }
     ]
   },
   {
     "id": 12,
-    "question": "What kind of issue are you noticing?",
-    "is_final": true,
-    "answer": 15,
-    "options": []
-  },
-  {
-    "id": 13,
-    "question": "What kind of issue are you noticing?",
-    "is_final": false,
+    "question": "Which of these describes the problem best?",
     "options": [
-      { "id": 26, "text": "Legal or accountability concerns regarding the AI’s outputs.", "threat_id": 16 },
-      { "id": 27, "text": "Concerns about misuse of AI for harmful purposes.", "next_question_id": 21 },
-      { "id": 28, "text": "Overuse or excessive reliance on AI-generated content.", "threat_id": 24 }
+      { "id": 29, "text": "The system is wasting resources or running slower than usual.", "is_final": true, "threat_id": 33 },
+      { "id": 30, "text": "Protections or restrictions on the system appear to have been bypassed.", "is_final": true, "threat_id": 17 },
+      { "id": 31, "text": "The system generates harmful or unexpected responses after certain inputs.", "is_final": true, "threat_id": 30 }
     ]
   },
   {
-    "id": 21,
+    "id": 13,
+    "question": "Which of these describes the issue best?",
+    "options": [
+      { "id": 32, "text": "Sensitive information or system functionality appears to have been stolen or copied.", "is_final": true, "threat_id": 21 },
+      { "id": 33, "text": "Someone has gained unauthorized access, potentially exposing sensitive data.", "is_final": true, "threat_id": 1 },
+      { "id": 34, "text": "The AI system or server has been remotely accessed or manipulated.", "is_final": true, "threat_id": 32 }
+    ]
+  },
+  {
+    "id": 14,
+    "question": "What specifically concerns you about the data collection?",
+    "options": [
+      { "id": 35, "text": "Data is being collected extensively or from unknown sources.", "is_final": true, "threat_id": 25 },
+      { "id": 36, "text": "Data collection practices may violate privacy regulations.", "is_final": true, "threat_id": 28 }
+    ]
+  },
+  {
+    "id": 15,
+    "question": "What specific issue are you noticing?",
+    "options": [
+      { "id": 37, "text": "The AI is revealing private details during interactions.", "is_final": true, "threat_id": 29 },
+      { "id": 38, "text": "It seems impossible to fully remove personal data from the system.", "is_final": true, "threat_id": 4 },
+      { "id": 39, "text": "The AI’s outputs or internal behavior reveal information about sensitive attributes like age, gender, or location.", "is_final": true, "threat_id": 2 }
+    ]
+  },
+  {
+    "id": 16,
+    "question": "What specific issue are you noticing?",
+    "options": [
+      { "id": 40, "text": "Sensitive data appears to have been extracted or stolen from the model’s memory.", "is_final": true, "threat_id": 7 },
+      { "id": 41, "text": "Carefully constructed user prompts have been accessed without authorization.", "is_final": true, "threat_id": 31 },
+      { "id": 42, "text": "The training data appears to have been reconstructed or reverse-engineered from the model’s outputs.", "is_final": true, "threat_id": 22 },
+      { "id": 43, "text": "Confidential information or resources seem to have been extracted from the model.", "is_final": true, "threat_id": 8 }
+    ]
+  },
+  {
+    "id": 17,
+    "question": "What specific issue are you noticing?",
+    "options": [
+      { "id": 44, "text": "The AI generates incorrect or nonsensical information that looks plausible.", "is_final": true, "threat_id": 11 },
+      { "id": 45, "text": "The AI misunderstands or fails to accurately respond to instructions or intentions.", "is_final": true, "threat_id": 20 },
+      { "id": 46, "text": "The AI is deliberately used to create false or misleading content.", "is_final": true, "threat_id": 10 }
+    ]
+  },
+  {
+    "id": 18,
+    "question": "What specific issue are you noticing?",
+    "options": [
+      { "id": 47, "text": "Someone is using the AI to impersonate real individuals.", "is_final": true, "threat_id": 13 },
+      { "id": 48, "text": "Realistic but fake identities are being created with AI-generated content.", "is_final": true, "threat_id": 9 }
+    ]
+  },
+  {
+    "id": 19,
     "question": "What kind of harmful misuse are you noticing?",
-    "is_final": true,
-    "answer": 14,
-    "options": []
+    "options": [
+      { "id": 49, "text": "The AI is being used to generate malware or harmful scripts.", "is_final": true, "threat_id": 14 },
+      { "id": 50, "text": "The AI is being used to create realistic phishing emails to deceive people.", "is_final": true, "threat_id": 26 },
+      { "id": 51, "text": "The AI is generating harmful or violent content, such as explicit or offensive material.", "is_final": true, "threat_id": 12 }
+    ]
   }
 ]

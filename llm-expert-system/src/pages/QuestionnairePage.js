@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const QuestionnairePage = () => {
-  const [questionHistory, setQuestionHistory] = useState([]); // Array to store questions
+  const [questionHistory, setQuestionHistory] = useState([]); // Store questions
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,42 +19,75 @@ const QuestionnairePage = () => {
         setQuestionHistory([{ ...response.data, options: response.data.options || [] }]);
         setError(null);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("Error fetching the starting question.");
       })
       .finally(() => setLoading(false));
   };
 
-  const handleOptionClick = (nextQuestionId) => {
-    if (!nextQuestionId) return;
+  const handleOptionClick = (option) => {
+    if (option.is_final) {
+        if (!option.threat_id) {
+            console.error("No threat ID provided for final option.");
+            setError("This option does not lead to a valid threat.");
+            return;
+        }
+        fetchThreatDetails(option.threat_id);
+        return;
+    }
 
-    // Check if the question already exists in history
-    if (questionHistory.some((q) => q.id === nextQuestionId)) {
-      console.log("Question already exists in history.");
-      return;
+    if (!option.next_question_id) {
+        console.error("No next question ID provided for this option.");
+        setError("This option does not lead to another question.");
+        return;
+    }
+
+    if (questionHistory.some((q) => q.id === option.next_question_id)) {
+        console.log("Question already exists in history.");
+        return;
     }
 
     setLoading(true);
     axios
-      .get(`http://127.0.0.1:8000/api/questions/${nextQuestionId}/`)
-      .then((response) => {
-        console.log("API Response:", response.data); // Debug the response
-        setQuestionHistory((prevHistory) => [
-          ...prevHistory,
-          { ...response.data, options: response.data.options || [] },
-        ]);
-        setError(null);
-      })
-      .catch((err) => {
-        setError("Error fetching the next question.");
-      })
-      .finally(() => setLoading(false));
+        .get(`http://127.0.0.1:8000/api/questions/${option.next_question_id}/`)
+        .then((response) => {
+            setQuestionHistory((prevHistory) => [
+                ...prevHistory,
+                { ...response.data, options: response.data.options || [] },
+            ]);
+            setError(null);
+        })
+        .catch((err) => {
+            setError("Error fetching the next question.");
+            console.error(err);
+        })
+        .finally(() => setLoading(false));
+};
+
+  const fetchThreatDetails = async (threatId) => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/api/threats/${threatId}/`);
+      const threatDetails = response.data;
+
+      setQuestionHistory((prevHistory) => [
+        ...prevHistory,
+        {
+          id: `threat-${threatId}`,
+          text: "Threat Details",
+          is_final: true,
+          answer: threatDetails,
+          options: [],
+        },
+      ]);
+      setError(null);
+    } catch (error) {
+      console.error("Error fetching threat details:", error);
+      setError("Error fetching threat details.");
+    }
   };
 
   const handleRestart = () => {
-    setQuestionHistory([]); // Clear the history
-    // setError(null);
-    // fetchStartingQuestion();
+    setQuestionHistory([]);
     setError(null);
     setLoading(true);
     fetchStartingQuestion();
@@ -69,10 +102,6 @@ const QuestionnairePage = () => {
 
       {questionHistory.map((question, index) => (
         <div key={index} style={{ marginBottom: "20px" }}>
-          <p>
-            <strong>Question {index + 1}:</strong> {question.text}
-          </p>
-
           {question.is_final ? (
             <div>
               <h2>Threat Details:</h2>
@@ -91,19 +120,23 @@ const QuestionnairePage = () => {
               </button>
             </div>
           ) : (
-            <ul>
-              {question.options.map((option) => (
-                <li
-                  key={option.id}
-                  onClick={() => handleOptionClick(option.next_question_id)}
-                  style={{ cursor: "pointer", margin: "5px 0" }}
-                >
-                  {option.text}
-                </li>
-              ))}
-            </ul>
+            <>
+              <p>
+                <strong>Question {index + 1}:</strong> {question.text}
+              </p>
+              <ul>
+                {question.options.map((option) => (
+                  <li
+                    key={option.id}
+                    onClick={() => handleOptionClick(option)}
+                    style={{ cursor: "pointer", margin: "5px 0" }}
+                  >
+                    {option.text}
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
-
         </div>
       ))}
     </div>

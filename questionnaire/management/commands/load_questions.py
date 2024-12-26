@@ -12,7 +12,7 @@ class Command(BaseCommand):
             with open(file_path, "r") as file:
                 data = json.load(file)
 
-                # First loop: Create or load questions without next_question and other fields
+                # First loop: Create or load questions without linking options or next_question
                 questions = {}
                 for item in data:
                     question, created = Question.objects.get_or_create(
@@ -22,40 +22,30 @@ class Command(BaseCommand):
                     questions[question.id] = question
                     print(f"Question Created/Loaded: {question.id}, Text: {question.text}")
 
-                # Second loop: Update next_question, is_final, answer, and create options
+                # Second loop: Update options with is_final logic and link next_question/threats
                 for item in data:
                     question = questions[item["id"]]
 
-                    # Update next_question if available
-                    next_question_id = item.get("next_question_id")
-                    if next_question_id:
-                        next_question = questions.get(next_question_id)
-                        if next_question:
-                            question.next_question = next_question
-
-                    # Set is_final and answer
-                    question.is_final = item.get("is_final", False)
-                    if item.get("is_final"):
-                        question.answer = Threat.objects.filter(id=item.get("answer")).first()
-
-                    question.save()
-
-                    # Create options for the question
-                    for option in item["options"]:
+                    for option_data in item["options"]:
+                        next_question = questions.get(option_data.get("next_question_id"))
                         threat_instance = None
-                        if option.get("threat_id"):
-                            threat_instance = Threat.objects.get(id=option["threat_id"])
+
+                        if option_data.get("is_final") and option_data.get("threat_id"):
+                            threat_instance = Threat.objects.get(id=option_data["threat_id"])
 
                         Option.objects.get_or_create(
-                            id=option["id"],
+                            id=option_data["id"],
                             question=question,
                             defaults={
-                                "text": option["text"],
-                                "next_question": questions.get(option.get("next_question_id")),
-                                "threat": threat_instance,
+                                "text": option_data["text"],
+                                "next_question": questions.get(option_data.get("next_question_id")),
+                                "threat": Threat.objects.get(id=option_data["threat_id"])
+                                    if option_data.get("is_final") else None,
+                                "is_final": option_data.get("is_final", False),
                             },
                         )
-                        print(f"Option Created: {option['id']} for Question {question.id}")
+
+                        print(f"Option Created: {option_data['id']} for Question {question.id}")
 
                 self.stdout.write(self.style.SUCCESS("Decision tree loaded successfully!"))
 

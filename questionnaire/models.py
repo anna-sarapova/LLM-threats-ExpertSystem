@@ -13,8 +13,6 @@ class Question(models.Model):
     def __str__(self):
         return self.text
 
-
-
 class Option(models.Model):
     question = models.ForeignKey(
         Question, related_name='options', on_delete=models.CASCADE
@@ -23,12 +21,14 @@ class Option(models.Model):
     next_question = models.ForeignKey(
         Question, null=True, blank=True, on_delete=models.SET_NULL
     )
-    threat = models.ForeignKey(  # Update this to link to the Threat model
+    threat = models.ForeignKey(
         'Threat', null=True, blank=True, on_delete=models.SET_NULL
     )
+    is_final = models.BooleanField(default=False)
 
     def __str__(self):
         return self.text
+
 
 
 class Threat(models.Model):

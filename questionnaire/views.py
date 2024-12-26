@@ -43,15 +43,14 @@ def get_question(request, question_id):
     }
 
     # If the question is final and has an answer (Threat), include it in the response
-    if question.is_final:
-        if question.answer:
-            response_data["answer"] = {
-                "id": question.answer.id,
-                "name": question.answer.name,
-                "description": question.answer.description,
-                "impact": question.answer.impact,
-                "mitigation": question.answer.mitigation,
-            }
+    if question.is_final and question.answer:
+        response_data["answer"] = {
+            "id": question.answer.id,
+            "name": question.answer.name,
+            "description": question.answer.description,
+            "impact": question.answer.impact,
+            "mitigation": question.answer.mitigation,
+        }
     else:
         # Add options if it's not a final question
         for option in question.options.all():
@@ -60,6 +59,7 @@ def get_question(request, question_id):
                 "text": option.text,
                 "next_question_id": option.next_question.id if option.next_question else None,
                 "threat_id": option.threat.id if option.threat else None,
+                "is_final": option.is_final,
             })
 
     return JsonResponse(response_data)
