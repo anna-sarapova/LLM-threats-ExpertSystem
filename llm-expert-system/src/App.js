@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import QuestionnairePage from './pages/QuestionnairePage';
 import ThreatPage from './pages/ThreatPage';
+import ThreatDictionaryPage from "./pages/ThreatDictionaryPage";
 
 const App = () => {
   return (
@@ -12,6 +13,9 @@ const App = () => {
 
         {/* Threat Details Page */}
         <Route path="/threat/:id" element={<ThreatPage />} />
+
+        {/* Threat Dictionary Page */}
+        <Route path="/dictionary" element={<ThreatDictionaryPage />} />
 
         {/* 404 Page */}
         <Route
