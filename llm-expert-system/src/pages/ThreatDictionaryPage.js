@@ -36,18 +36,18 @@ const ThreatDictionaryPage = () => {
 
   return (
     <div>
-      <h1>Threat Dictionary</h1>
-      <ul style={{ listStyleType: "none", padding: 0 }}>
-        {threats.map((threat) => (
-          <li key={threat.id} style={{ margin: "10px 0" }}>
-            <Link
-              to={`/threat/${threat.id}`}
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              {threat.name}
-            </Link>
-          </li>
-        ))}
+        <h1>Threat Dictionary</h1>
+          <ul style={{ listStyleType: "disc", padding: "0px 40px" }}>
+            {threats.map((threat) => (
+              <li key={threat.id} style={{ margin: "10px 0" }}>
+                <Link
+                  to={`/threat/${threat.id}`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  {threat.name}
+                </Link>
+              </li>
+            ))}
       </ul>
     </div>
   );
